@@ -1,6 +1,7 @@
 <?php
 include TEMPLATES_DIR.'header.php';
 include MODULES_DIR.'registration.php';
+include MODULES_DIR.'authorization.php';
 
 $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = filter_input(INPUT_POST, 'pw', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -11,6 +12,7 @@ if (isset($_FILES['picture'])) {
 if (isset($username) && isset($pw)) {
     try {
         register($username, $pw, $picture);
+        login($username, $pw);
         header('Location: index.php');
     } catch (Exception $e) {
         echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
