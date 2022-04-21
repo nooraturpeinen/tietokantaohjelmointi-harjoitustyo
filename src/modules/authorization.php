@@ -3,11 +3,11 @@ function login($username, $pw) {
     require_once MODULES_DIR.'db.php';
 
     if (!isset($username) || !isset($pw)) {
-        throw new Exception('Missing parameters.');
+        throw new Exception("Missing parameters.");
     }
 
     if (empty($username) || empty($pw)) {
-        throw new Exception('Username and password must be included.');
+        throw new Exception("Username and password must be included.");
     }
 
     try {
@@ -18,7 +18,7 @@ function login($username, $pw) {
         $statement->execute();
 
         if ($statement->rowCount() <= 0) {
-            throw new Exception("User not found, can't login.");
+            throw new Exception("User not found.");
         }
 
         $row = $statement->fetch();
@@ -27,8 +27,8 @@ function login($username, $pw) {
             throw new Exception("Incorrect password.");
         }
 
-        $_SESSION["username"] = $username;
-        $_SESSION["picture"] = $row["picture"];
+        $_SESSION['username'] = $username;
+        $_SESSION['picture'] = $row['picture'];
     } catch (PDOException $e){
         throw $e;
     }
