@@ -8,7 +8,7 @@ create table `user` (
     id int primary key not null auto_increment,
     username varchar(25) unique not null,
     pw varchar(255) not null,
-    picture varchar(100),
+    picture varchar(100)
 );
 
 insert into `user` (username, pw, picture) values ();
