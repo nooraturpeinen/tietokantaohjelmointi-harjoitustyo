@@ -42,12 +42,16 @@ if (isset($_SESSION["username"])) { ?>
     
     $posts = allPosts();
     foreach ($posts as $p) {
-        $post_id = $p["id"];
+        $post_id = $p["postid"];
 
-        echo "<div>
+        echo "<div id='postbox'>
             <h5>".$p["title"]."</h5>
-            <h6>@".$p["username"]."</h6>
+            <h6>@".$p["postusername"]."</h6>
             <p>".$p["post"]."</p>
+            <div>
+            <h6>".$p["commentusername"]."</h6>
+            <p>".$p["commentcomment"]."</p>
+            </div>
             <form action='index.php' method='post'>
                 <h6>Comment</h6>
                 <textarea name='comment' required></textarea>

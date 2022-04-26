@@ -56,7 +56,7 @@ function allPosts() {
 
     try {
         $db = openDb();
-        $sql = 'select * from post';
+        $sql = 'select post.id as postid, post.username as postusername, title, post, post.created, IFNULL(comment.id, ""), IFNULL(comment.username, "") as commentusername, IFNULL(comment.comment, "") as commentcomment, IFNULL(comment.created, "") from post left outer join comment on post.id = comment.post_id';
         $posts = $db->query($sql);
 
         return $posts->fetchAll();
@@ -64,6 +64,29 @@ function allPosts() {
         throw $e;
     }
 }
+
+/*
+create table post (
+    id int primary key not null auto_increment,
+    username varchar(25) not null,
+    title varchar(150) not null,
+    post text not null,
+    created timestamp default current_timestamp not null,
+    updated datetime,
+    foreign key (username) references `user`(username)
+);
+
+create table comment (
+    id int primary key not null auto_increment,
+    post_id int not null,
+    username varchar(25) not null,
+    comment text not null,
+    created timestamp default current_timestamp not null,
+    updated datetime,
+    foreign key (post_id) references post(id),
+    foreign key (username) references `user`(username)
+);
+ */
 
 function allUsersPosts() {
     require_once MODULES_DIR.'db.php';

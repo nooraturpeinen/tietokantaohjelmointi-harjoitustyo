@@ -11,6 +11,9 @@ create table `user` (
     picture varchar(100)
 );
 
+insert into `user` (username, pw, picture) values ("noora", "noora", "blank_pfp.jpg");
+insert into `user` (username, pw, picture) values ("noorat", "noorat", "blank_pfp.jpg");
+
 create table post (
     id int primary key not null auto_increment,
     username varchar(25) not null,
@@ -20,6 +23,8 @@ create table post (
     updated datetime,
     foreign key (username) references `user`(username)
 );
+
+insert into post (username, title, post) values ("noora", "moikka", "eka postaukseni :)");
 
 create table comment (
     id int primary key not null auto_increment,
@@ -31,3 +36,6 @@ create table comment (
     foreign key (post_id) references post(id),
     foreign key (username) references `user`(username)
 );
+
+insert into comment (post_id, username, comment) values (1, "noorat", "kiva postaus!");
+insert into comment (post_id, username, comment) values (3, "noora", "jees!");
