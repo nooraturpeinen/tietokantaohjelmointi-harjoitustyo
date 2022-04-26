@@ -12,7 +12,7 @@ function login($username, $pw) {
 
     try {
         $db = openDb();
-        $sql = 'select username, pw from `user` where username = ?';
+        $sql = 'select id, username, pw, picture from `user` where username = ?';
         $statement = $db->prepare($sql);
         $statement->bindParam(1, $username);
         $statement->execute();
@@ -27,8 +27,10 @@ function login($username, $pw) {
             throw new Exception("Incorrect password.");
         }
 
-        $_SESSION['username'] = $username;
-        $_SESSION['picture'] = $row['picture'];
+        $_SESSION["username"] = $row["username"];
+        $_SESSION["id"] = $row["id"];
+        $_SESSION["pw"] = $row["pw"];
+        $_SESSION["picture"] = $row["picture"];
     } catch (PDOException $e){
         throw $e;
     }
