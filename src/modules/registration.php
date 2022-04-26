@@ -11,20 +11,32 @@ function register($username, $pw, $picture) {
     }
 
     try {
-        $filename = $picture['name'];
-        $filetype = $picture['type'];
-        $path = PROFILE_PICTURES_DIR.basename($filename);
-        move_uploaded_file($picture['tmp_name'], $path);
-        $db = openDb();
-        $sql = 'insert into `user` (username, pw, picture) values (?, ?, ?)';
-        $statement = $db->prepare($sql);
-        $statement->bindParam(1, $username);
-        $hash_pw = password_hash($pw, PASSWORD_DEFAULT);
-        $statement->bindParam(2, $hash_pw);
-        $statement->bindParam(3, $filename);
-        $statement->execute();
-        $data = array('id' => $db->lastInsertId(), 'username' => $username, 'pw' => $hash_pw, 'picture' => $filename, 'filename' => $filename, 'type' => $filetype);
-        echo json_encode($data);
+        if ($picture == 'blank_pfp.png') {
+            $db = openDb();
+            $sql = 'insert into `user` (username, pw, picture) values (?, ?, ?)';
+            $statement = $db->prepare($sql);
+            $statement->bindParam(1, $username);
+            $hash_pw = password_hash($pw, PASSWORD_DEFAULT);
+            $statement->bindParam(2, $hash_pw);
+            $statement->bindParam(3, $picture);
+            $statement->execute();
+            $data = array('id' => $db->lastInsertId(), 'username' => $username, 'pw' => $hash_pw, 'picture' => $picture);
+            echo json_encode($data);
+        } else {
+            $filename = $picture['name'];
+            $path = PROFILE_PICTURES_DIR.basename($filename);
+            move_uploaded_file($picture['tmp_name'], $path);
+            $db = openDb();
+            $sql = 'insert into `user` (username, pw, picture) values (?, ?, ?)';
+            $statement = $db->prepare($sql);
+            $statement->bindParam(1, $username);
+            $hash_pw = password_hash($pw, PASSWORD_DEFAULT);
+            $statement->bindParam(2, $hash_pw);
+            $statement->bindParam(3, $filename);
+            $statement->execute();
+            $data = array('id' => $db->lastInsertId(), 'username' => $username, 'pw' => $hash_pw, 'picture' => $filename, 'filename' => $filename);
+            echo json_encode($data);
+        }
     } catch (PDOException $e){
         throw $e;
     }
