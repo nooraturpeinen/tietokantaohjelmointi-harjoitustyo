@@ -2,3 +2,90 @@ img {
     width: 10em;
     border-radius: 50%;
 }
+
+h3 {
+    margin-bottom: 1.5em;
+}
+
+h5 {
+    margin-bottom: 1em;
+}
+
+#introtext {
+    margin-bottom: 2.5em;
+}
+
+#postbox {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+input {
+    width: 20em;
+    margin-bottom: 1em;
+}
+
+textarea {
+    height: 5em;
+    width: 20em;
+    margin-bottom: 1em;
+}
+
+.postbutton {
+    width: 4em;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+}
+
+#allposts {
+    width: 30em;
+    border-radius: 0.5em;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    background-color: rgb(245, 243, 243);
+}
+
+#postpicture {
+    width: 3em;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+#postusername {
+    display: inline-block;
+    margin-left: 0.5em;
+    
+}
+
+#posttitle {
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+#post {
+    margin-left: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+#allcomments {
+    margin-left: 0.5em;
+}
+
+#commentpicture {
+    width: 1.5em;
+}
+
+#commentusername {
+    display: inline-block;
+    margin-left: 0.25em;
+}
+
+#comment {
+    margin-top: 0.5em;
+}
+
+.commentbox {
+    margin-top: 1.5em;
+    margin-left: 0.5em;
+    padding-bottom: 0.5em;
+}
