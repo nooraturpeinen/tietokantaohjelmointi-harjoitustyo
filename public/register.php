@@ -1,5 +1,8 @@
 <?php
 include TEMPLATES_DIR.'header.php';
+?>
+<style> <?php include BASE_DIR.'style.css' ?> </style>
+<?php
 include MODULES_DIR.'registration.php';
 include MODULES_DIR.'authorization.php';
 

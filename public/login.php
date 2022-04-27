@@ -1,11 +1,14 @@
 <?php
 include TEMPLATES_DIR.'header.php';
+?>
+<style> <?php include BASE_DIR.'style.css' ?> </style>
+<?php
 include MODULES_DIR.'authorization.php';
 
 $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = filter_input(INPUT_POST, 'pw', FILTER_SANITIZE_SPECIAL_CHARS);
 
-if (isset($_SESSION['username']) && isset($username) && isset($pw)) {
+if (!isset($_SESSION['username']) && isset($username) && isset($pw)) {
     try {
         login($username, $pw);
         header('Location: index.php');
