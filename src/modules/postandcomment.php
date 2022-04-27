@@ -12,13 +12,13 @@ function createPost($title, $post) {
 
     try {
         $db = openDb();
-        $sql = 'insert into post (username, title, post) values (?, ?, ?)';
+        $sql = 'insert into post (user_id, title, post) values (?, ?, ?)';
         $statement = $db->prepare($sql);
-        $statement->bindParam(1, $_SESSION["username"]);
+        $statement->bindParam(1, $_SESSION["id"]);
         $statement->bindParam(2, $title);
         $statement->bindParam(3, $post);
         $statement->execute();
-        $data = array('id' => $db->lastInsertId(), 'username' => $_SESSION["username"], 'title' => $title, 'post' => $post);
+        $data = array('id' => $db->lastInsertId(), 'user_id' => $_SESSION["id"], 'title' => $title, 'post' => $post);
         echo json_encode($data);
     } catch (PDOException $e){
         throw $e;
@@ -38,13 +38,13 @@ function createComment($post_id, $comment) {
 
     try {
         $db = openDb();
-        $sql = 'insert into comment (post_id, username, comment) values (?, ?, ?)';
+        $sql = 'insert into comment (post_id, user_id, comment) values (?, ?, ?)';
         $statement = $db->prepare($sql);
         $statement->bindParam(1, $post_id);
-        $statement->bindParam(2, $_SESSION["username"]);
+        $statement->bindParam(2, $_SESSION["id"]);
         $statement->bindParam(3, $comment);
         $statement->execute();
-        $data = array('id' => $db->lastInsertId(), 'post_id' => $post_id, 'username' => $_SESSION["username"], 'comment' => $comment);
+        $data = array('id' => $db->lastInsertId(), 'post_id' => $post_id, 'user_id' => $_SESSION["id"], 'comment' => $comment);
         echo json_encode($data);
     } catch (PDOException $e){
         throw $e;
@@ -56,7 +56,7 @@ function allPosts() {
 
     try {
         $db = openDb();
-        $sql = 'select post.id as postid, post.username as postusername, title, post, post.created, IFNULL(comment.id, ""), IFNULL(comment.username, "") as commentusername, IFNULL(comment.comment, "") as commentcomment, IFNULL(comment.created, "") from post left outer join comment on post.id = comment.post_id';
+        $sql = 'select post.id as id, user.username as username, title, post, created, updated, picture from post inner join user on post.user_id = user.id';
         $posts = $db->query($sql);
 
         return $posts->fetchAll();
@@ -65,40 +65,51 @@ function allPosts() {
     }
 }
 
-/*
-create table post (
-    id int primary key not null auto_increment,
-    username varchar(25) not null,
-    title varchar(150) not null,
-    post text not null,
-    created timestamp default current_timestamp not null,
-    updated datetime,
-    foreign key (username) references `user`(username)
-);
+function allComments($post_id) {
+    require_once MODULES_DIR.'db.php';
 
-create table comment (
-    id int primary key not null auto_increment,
-    post_id int not null,
-    username varchar(25) not null,
-    comment text not null,
-    created timestamp default current_timestamp not null,
-    updated datetime,
-    foreign key (post_id) references post(id),
-    foreign key (username) references `user`(username)
-);
- */
+    try {
+        $db = openDb();
+        $sql = 'select comment.id as id, post_id, user.username as username, comment, created, updated, picture from comment inner join user on comment.user_id = user.id where post_id = ?';
+        $comments = $db->prepare($sql);
+        $comments->bindParam(1, $post_id);
+        $comments->execute();
+        
+        return $comments->fetchAll();
+    } catch (PDOException $e){
+        throw $e;
+    }
+}
 
 function allUsersPosts() {
     require_once MODULES_DIR.'db.php';
 
-    $username = $_SESSION["username"];
+    $user_id = $_SESSION["id"];
 
     try {
         $db = openDb();
-        $sql = "select * from post where username = '$username'";
-        $posts = $db->query($sql);
-
+        $sql = 'select post.id as id, user.username as username, title, post, created, updated, picture from post inner join user on post.user_id = user.id where user_id = ?';
+        $posts = $db->prepare($sql);
+        $posts->bindParam(1, $user_id);
+        $posts->execute();
+        
         return $posts->fetchAll();
+    } catch (PDOException $e){
+        throw $e;
+    }
+}
+
+function allUsersPostsComments($post_id) {
+    require_once MODULES_DIR.'db.php';
+
+    try {
+        $db = openDb();
+        $sql = 'select comment.id as id, post_id, user.username as username, comment, created, updated, picture from comment inner join user on comment.user_id = user.id where post_id = ?';
+        $comments = $db->prepare($sql);
+        $comments->bindParam(1, $post_id);
+        $comments->execute();
+        
+        return $comments->fetchAll();
     } catch (PDOException $e){
         throw $e;
     }
