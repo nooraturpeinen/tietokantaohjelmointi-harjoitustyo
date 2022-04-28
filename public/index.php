@@ -19,7 +19,7 @@ if (isset($_SESSION["username"]) && isset($title) && isset($post) && !empty($tit
 
 if (isset($_SESSION["username"])) { ?>
 
-<div class="container-fluid m-4">
+<div class="container-fluid p-5">
     <h3>Welcome <?php echo $_SESSION["username"] ?>!</h3>
     <h5>Start a new discussion...</h5>
     <form action="index.php" method="post" id="postbox">
@@ -78,7 +78,7 @@ foreach ($posts as $p) {
 
 <?php } else { ?>
 
-<div class="container-fluid m-4">
+<div class="container-fluid p-5">
     <h3>Welcome!</h3>
     <h5 id="introtext">Login to start a new discussion or join ongoing conversation.</h5>
     <?php

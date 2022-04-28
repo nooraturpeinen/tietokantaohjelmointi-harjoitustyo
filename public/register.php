@@ -26,7 +26,7 @@ if (isset($username) && isset($pw)) {
 }
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid p-5">
     <div>
         <h3>Register</h3>
     </div>
@@ -44,7 +44,7 @@ if (isset($username) && isset($pw)) {
             <input type="file" name="picture"/>
         </div>
         <div>
-            <button type="submit">Register</button>
+            <button type="submit" class="loginregisterbutton">Register</button>
         </div>
     </form>
     <div>

@@ -7,21 +7,29 @@ include MODULES_DIR.'postandcomment.php';
 
 if (isset($_SESSION["username"])) { ?>
 
-<div class="container-fluid m-4">
-    <div class="row">
+<div class="container-fluid p-5">
+    <div class="row mb-5">
         <div class="col-sm">
-            <img src="../profile_pictures/<?php echo $_SESSION["picture"] ?>">
-            <!-- echo "<img src='../profile_pictures/".$_SESSION["picture"]."' >"; -->
+            <img src="../profile_pictures/<?php echo $_SESSION["picture"] ?>" id="mypagepfp">
         </div>
         <div class="col-sm">
             <h4><?php echo $_SESSION["username"] ?></h4>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <button type="button"><a href="changepfp.php">Edit Profile</a></button>
-            <button type="button"><a href="unregister.php" onclick="return confirm('Are you sure?')">Delete Account</a></button>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm mb-2 d-flex justify-content-end">
+                    <button type="button" class="mypagebutton"><a href="editprofile.php">Edit Profile</a></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm d-flex justify-content-end">
+                    <button type="button" class="mypagebutton"><a href="unregister.php" onclick="return confirm('Are you sure?')">Delete Account</a></button>
+                </div>
+            </div>
         </div>
+    </div>
+    <div>
+        <h5>My Posts</h5>
     </div>
     <?php
     $posts = allUsersPosts();

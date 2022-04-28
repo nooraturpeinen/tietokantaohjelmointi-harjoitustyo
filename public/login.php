@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
 
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid p-5">
     <div>
         <h3>Login</h3>
     </div>
@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
             <input type="password" name="pw" required/>
         </div>
         <div>
-            <button type="submit">Login</button>
+            <button type="submit" class="loginregisterbutton">Login</button>
         </div>
     </form>
     <div>
