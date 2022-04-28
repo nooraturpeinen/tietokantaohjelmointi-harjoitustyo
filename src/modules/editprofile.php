@@ -1,13 +1,38 @@
 <?php
 
-function changeProfilePicture($picture) {
+function changeUsername($username) {
     require_once MODULES_DIR.'db.php';
 
-    if (!isset($picture)) {
+    if (!isset($username)) {
         throw new Exception('Missing parameters.');
     }
 
-    if (empty($picture)) {
+    if (empty($username)) {
+        throw new Exception('Password must be included.');
+    }
+
+    try {
+        $db = openDb();
+        $sql = 'update `user` set username = ? where id = ?';
+        $statement = $db->prepare($sql);
+        $statement->bindParam(1, $username);
+        $statement->bindParam(2, $_SESSION["id"]);
+        $statement->execute();
+
+        $_SESSION["username"] = $username;
+    } catch (PDOException $e){
+        throw $e;
+    }
+}
+
+function changeProfilePicture($picture) {
+    require_once MODULES_DIR.'db.php';
+
+    if (!isset($picture['name'])) {
+        throw new Exception('Missing parameters.');
+    }
+
+    if (empty($picture['name'])) {
         throw new Exception('Profile picture must be included.');
     }
 
