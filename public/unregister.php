@@ -4,9 +4,9 @@ include MODULES_DIR.'registration.php';
 include MODULES_DIR.'authorization.php';
 
 if (isset($_SESSION["username"])) {
-    $username = $_SESSION["username"];
+    $id = $_SESSION["id"];
     try {
-        unregister($username);
+        unregister($id);
         logout();
         header('Location: index.php');
     } catch (Exception $e){

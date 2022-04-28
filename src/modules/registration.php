@@ -42,19 +42,19 @@ function register($username, $pw, $picture) {
     }
 }
 
-function unregister($username) {
+function unregister($id) {
     require_once MODULES_DIR.'db.php';
 
-    if (!isset($username)) {
+    if (!isset($id)) {
         throw new Exception("Missing parameters.");
     }
 
     try {
         $db = openDb();
         $db->beginTransaction();
-        $sql = 'delete from `user` where username = ?';
+        $sql = 'delete from `user` where id = ?';
         $statement = $db->prepare($sql);
-        $statement->bindParam(1, $username);
+        $statement->bindParam(1, $id);
         $statement->execute();
         $db->commit();
     } catch (PDOException $e) {
