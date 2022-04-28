@@ -52,6 +52,7 @@ foreach ($posts as $p) {
     echo "<div id='allposts'>
         <img src='../profile_pictures/".$p["picture"]."' id='postpicture'>
         <h5 id='postusername'>".$p["username"]."</h5>
+        <small>".$p["created"]."</small>
         <hr>
         <h6 id='posttitle'>".$p["title"]."</h6>
         <p id='post'>".$p["post"]."</p>
@@ -61,6 +62,7 @@ foreach ($posts as $p) {
         echo "<div id='allcomments'>
             <img src='../profile_pictures/".$c["picture"]."' id='commentpicture'>
             <h6 id='commentusername'>".$c["username"]."</h6>
+            <small>".$p["created"]."</small>
             <p id='comment'>".$c["comment"]."</p>
         </div>";
     }
@@ -87,6 +89,7 @@ foreach ($posts as $p) {
         echo "<div id='allposts'>
             <img src='../profile_pictures/".$p["picture"]."' id='postpicture'>
             <h5 id='postusername'>".$p["username"]."</h5>
+            <small>".$p["created"]."</small>
             <hr>
             <h6 id='posttitle'>".$p["title"]."</h6>
             <p id='post'>".$p["post"]."</p>
@@ -96,6 +99,7 @@ foreach ($posts as $p) {
             echo "<div id='allcomments'>
                 <img src='../profile_pictures/".$c["picture"]."' id='commentpicture'>
                 <h6 id='commentusername'>".$c["username"]."</h6>
+                <small>".$p["created"]."</small>
                 <p id='comment'>".$c["comment"]."</p>
             </div>";
         }

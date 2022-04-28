@@ -56,7 +56,7 @@ function allPosts() {
 
     try {
         $db = openDb();
-        $sql = 'select post.id as id, user.username as username, title, post, created, updated, picture from post inner join user on post.user_id = user.id';
+        $sql = 'select post.id as id, user.username as username, title, post, date_format(created, "%d.%m.%Y %H:%i") as created, picture from post inner join user on post.user_id = user.id';
         $posts = $db->query($sql);
 
         return $posts->fetchAll();
@@ -70,7 +70,7 @@ function allComments($post_id) {
 
     try {
         $db = openDb();
-        $sql = 'select comment.id as id, post_id, user.username as username, comment, created, updated, picture from comment inner join user on comment.user_id = user.id where post_id = ?';
+        $sql = 'select comment.id as id, post_id, user.username as username, comment, date_format(created, "%d.%m.%Y %H:%i") as created, picture from comment inner join user on comment.user_id = user.id where post_id = ?';
         $comments = $db->prepare($sql);
         $comments->bindParam(1, $post_id);
         $comments->execute();
@@ -88,7 +88,7 @@ function allUsersPosts() {
 
     try {
         $db = openDb();
-        $sql = 'select post.id as id, user.username as username, title, post, created, updated, picture from post inner join user on post.user_id = user.id where user_id = ?';
+        $sql = 'select post.id as id, user.username as username, title, post, date_format(created, "%d.%m.%Y %H:%i") as created, picture from post inner join user on post.user_id = user.id where user_id = ?';
         $posts = $db->prepare($sql);
         $posts->bindParam(1, $user_id);
         $posts->execute();
@@ -104,7 +104,7 @@ function allUsersPostsComments($post_id) {
 
     try {
         $db = openDb();
-        $sql = 'select comment.id as id, post_id, user.username as username, comment, created, updated, picture from comment inner join user on comment.user_id = user.id where post_id = ?';
+        $sql = 'select comment.id as id, post_id, user.username as username, comment, date_format(created, "%d.%m.%Y %H:%i") as created, picture from comment inner join user on comment.user_id = user.id where post_id = ?';
         $comments = $db->prepare($sql);
         $comments->bindParam(1, $post_id);
         $comments->execute();
