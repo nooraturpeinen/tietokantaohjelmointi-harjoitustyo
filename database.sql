@@ -17,7 +17,6 @@ create table post (
     title varchar(150) not null,
     post text not null,
     created timestamp default current_timestamp not null,
-    updated datetime,
     foreign key (user_id) references `user`(id)
 );
 
@@ -27,7 +26,6 @@ create table `comment` (
     user_id int not null,
     comment text not null,
     created timestamp default current_timestamp not null,
-    updated datetime,
     foreign key (post_id) references post(id),
     foreign key (user_id) references `user`(id)
 );
