@@ -1,9 +1,16 @@
+button {
+    border-radius: 0.5em;
+}
+
 img {
-    width: 10em;
     border-radius: 50%;
 }
 
 h3 {
+    margin-bottom: 1.5em;
+}
+
+h4 {
     margin-bottom: 1.5em;
 }
 
@@ -47,6 +54,8 @@ textarea {
 
 #postpicture {
     width: 3em;
+    height: 3em;
+    object-fit: cover;
     margin-top: 1em;
     margin-left: 1em;
 }
@@ -73,6 +82,8 @@ textarea {
 
 #commentpicture {
     width: 1.5em;
+    height: 1.5em;
+    object-fit: cover;
 }
 
 #commentusername {
@@ -88,4 +99,29 @@ textarea {
     margin-top: 1.5em;
     margin-left: 0.5em;
     padding-bottom: 0.5em;
+}
+
+#mypagepfp {
+    width: 12em;
+    height: 12em;
+    object-fit: cover;
+}
+
+.mypagebutton {
+    border-radius: 0.5em;
+}
+
+#editprofilebutton {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 5em;
+}
+
+#canceleditbutton {
+    width: 5em;
+}
+
+.loginregisterbutton {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
 }
