@@ -56,6 +56,17 @@ function unregister($id) {
         $statement = $db->prepare($sql);
         $statement->bindParam(1, $id);
         $statement->execute();
+
+        $sql = 'delete from post where user_id = ?';
+        $statement = $db->prepare($sql);
+        $statement->bindParam(1, $id);
+        $statement->execute();
+
+        $sql = 'delete from comment where user_id = ?';
+        $statement = $db->prepare($sql);
+        $statement->bindParam(1, $id);
+        $statement->execute();
+
         $db->commit();
     } catch (PDOException $e) {
         $db->rollBack();
