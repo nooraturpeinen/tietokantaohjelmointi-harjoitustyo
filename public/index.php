@@ -99,7 +99,7 @@ foreach ($posts as $p) {
             echo "<div id='allcomments'>
                 <img src='../profile_pictures/".$c["picture"]."' id='commentpicture'>
                 <h6 id='commentusername'>".$c["username"]."</h6>
-                <small>".$p["created"]."</small>
+                <small>".$c["created"]."</small>
                 <p id='comment'>".$c["comment"]."</p>
             </div>";
         }

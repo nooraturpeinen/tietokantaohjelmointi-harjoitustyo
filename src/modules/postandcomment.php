@@ -38,7 +38,7 @@ function createComment($post_id, $comment) {
 
     try {
         $db = openDb();
-        $sql = 'insert into comment (post_id, user_id, comment) values (?, ?, ?)';
+        $sql = 'insert into `comment` (post_id, user_id, comment) values (?, ?, ?)';
         $statement = $db->prepare($sql);
         $statement->bindParam(1, $post_id);
         $statement->bindParam(2, $_SESSION["id"]);

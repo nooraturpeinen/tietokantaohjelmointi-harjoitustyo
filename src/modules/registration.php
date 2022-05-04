@@ -53,12 +53,12 @@ function unregister($id) {
         $db = openDb();
         $db->beginTransaction();
 
-        $sql = 'delete comment from comment inner join post on comment.post_id = post.id where post.user_id = ?';
+        $sql = 'delete `comment` from `comment` inner join post on comment.post_id = post.id where post.user_id = ?';
         $statement = $db->prepare($sql);
         $statement->bindParam(1, $id);
         $statement->execute();
 
-        $sql = 'delete from comment where user_id = ?';
+        $sql = 'delete from `comment` where user_id = ?';
         $statement = $db->prepare($sql);
         $statement->bindParam(1, $id);
         $statement->execute();
