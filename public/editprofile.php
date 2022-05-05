@@ -34,7 +34,7 @@ $pw = filter_input(INPUT_POST, 'pw', FILTER_SANITIZE_SPECIAL_CHARS);
 if (isset($pw) && !empty($pw)) {
     try {
         changePassword($pw);
-        header('Location: mypage.php');
+        echo '<div class="alert alert-success" role="alert">Password change successful.</div>';
     } catch (Exception $e) {
         echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
     }
