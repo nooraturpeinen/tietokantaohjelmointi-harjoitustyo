@@ -72,15 +72,18 @@ textarea {
 
 #posttitle {
     padding-left: 1.5em;
+    padding-right: 1.5em;
     margin-bottom: 0.5em;
 }
 
 #post {
     margin-left: 1.5em;
+    margin-right: 1.5em;
     padding-bottom: 1.5em;
 }
 
 #allcomments {
+    width: 25em;
     margin-left: 0.5em;
 }
 
