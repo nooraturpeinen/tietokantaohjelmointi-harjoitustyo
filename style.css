@@ -2,6 +2,10 @@ body {
     height: 100vh;
 }
 
+nav {
+    background-color: rgb(245, 243, 243);
+}
+
 button {
     border-radius: 0.5em;
 }
@@ -131,4 +135,8 @@ textarea {
 .loginregisterbutton {
     margin-top: 0.5em;
     margin-bottom: 1em;
+}
+
+footer {
+    background-color: rgb(245, 243, 243);
 }
